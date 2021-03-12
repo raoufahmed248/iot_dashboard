@@ -1,16 +1,29 @@
 from django.db import models
-from pygments.lexers import get_all_lexers
-from pygments.styles import get_all_styles
 
-LEXERS = [item for item in get_all_lexers() if item[1]]
-LANGUAGE_CHOICES = sorted([(item[1][0], item[0]) for item in LEXERS])
-STYLE_CHOICES = sorted([(item, item) for item in get_all_styles()])
 
-class TempData(models.Model):
+#in  fahrenheit 
+class Temperature(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     temperature = models.DecimalField(max_digits= 6,  decimal_places=2)
 
     class Meta:
         ordering = ['created']
+
+#in Percentage 
+class Humidity(models.Model):
+    created = models.DateTimeField(auto_now_add=True)
+    humidity = models.DecimalField(max_digits= 6,  decimal_places=2)
+
+    class Meta:
+        ordering = ['created']
+
+#in kPa
+class Pressure(models.Model):
+    created = models.DateTimeField(auto_now_add=True)
+    pressure = models.DecimalField(max_digits= 6,  decimal_places=2)
+
+    class Meta:
+        ordering = ['created']
+
 
 # Create your models here.
