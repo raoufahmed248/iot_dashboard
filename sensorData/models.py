@@ -7,7 +7,7 @@ class Temperature(models.Model):
     temperature = models.DecimalField(max_digits= 6,  decimal_places=2)
 
     class Meta:
-        ordering = ['created']
+        ordering = ['-created']
 
 #in Percentage 
 class Humidity(models.Model):
@@ -15,7 +15,7 @@ class Humidity(models.Model):
     humidity = models.DecimalField(max_digits= 6,  decimal_places=2)
 
     class Meta:
-        ordering = ['created']
+        ordering = ['-created']
 
 #in kPa
 class Pressure(models.Model):
@@ -23,7 +23,7 @@ class Pressure(models.Model):
     pressure = models.DecimalField(max_digits= 6,  decimal_places=2)
 
     class Meta:
-        ordering = ['created']
+        ordering = ['-created']
 
 
 # Create your models here.
