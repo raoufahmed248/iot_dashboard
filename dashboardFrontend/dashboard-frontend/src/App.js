@@ -43,7 +43,7 @@ function getData() {
 
   data.push({
     title: 'Temperature (F)',
-    data: getRandomDateArray(150)
+    data: getRandomDateArray(50)
   });
 
   data.push({
@@ -78,14 +78,21 @@ class App extends Component {
     let outputData = [];
     axios.get("http://localhost:8000/temperatures/")
       .then( (response) =>{
-        console.log(response.data)
-        this.setState({temperatures:response.data})
+        
+        var newResp = response.data;
+        newResp.forEach(function (item,index) {
+          var newDate = new Date(item.created);
+          item.time = newDate;
+          item.value = Number(item.temperature);
+        })
+        console.log(newResp)
+        this.setState({temperatures:newResp})
       });
   }
   
   componentDidMount() {
-    this.getTemperatureData();
     window.setInterval(() => {
+      this.getTemperatureData();
       this.setState({
         data: getData()
       })
@@ -111,7 +118,7 @@ class App extends Component {
           </div>
           <div className="sub chart-wrapper">
             <LineChart
-              data={this.state.data[0].data}
+              data={this.state.temperatures}
               title={this.state.data[0].title}
               color="#3E517A"
             />
