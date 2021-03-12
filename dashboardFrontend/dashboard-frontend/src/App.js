@@ -89,10 +89,41 @@ class App extends Component {
         this.setState({temperatures:newResp})
       });
   }
-  
+  getHumidityData() {
+    let outputData = [];
+    axios.get("http://localhost:8000/humidities/")
+      .then( (response) =>{
+        
+        var newResp = response.data;
+        newResp.forEach(function (item,index) {
+          var newDate = new Date(item.created);
+          item.time = newDate;
+          item.value = Number(item.humidity);
+        })
+        console.log(newResp)
+        this.setState({humidities:newResp})
+      });
+  }
+  getPressureData() {
+    let outputData = [];
+    axios.get("http://localhost:8000/pressures/")
+      .then( (response) =>{
+        
+        var newResp = response.data;
+        newResp.forEach(function (item,index) {
+          var newDate = new Date(item.created);
+          item.time = newDate;
+          item.value = Number(item.pressure);
+        })
+        console.log(newResp)
+        this.setState({pressures:newResp})
+      });
+  }
   componentDidMount() {
     window.setInterval(() => {
       this.getTemperatureData();
+      this.getHumidityData();
+      this.getPressureData();
       this.setState({
         data: getData()
       })
@@ -104,22 +135,22 @@ class App extends Component {
         <div className="App">
           <div className="sub chart-wrapper">
             <LineChart
-              data={this.state.data[0].data}
-              title={this.state.data[0].title}
-              color="#3E517A"
-            />
-          </div>
-          <div className="sub chart-wrapper">
-            <LineChart
-              data={this.state.data[0].data}
-              title={this.state.data[0].title}
-              color="#3E517A"
-            />
-          </div>
-          <div className="sub chart-wrapper">
-            <LineChart
               data={this.state.temperatures}
-              title={this.state.data[0].title}
+              title={"Temperature (F)"}
+              color="#3E517A"
+            />
+          </div>
+          <div className="sub chart-wrapper">
+            <LineChart
+              data={this.state.humidities}
+              title={"Humidities (%)"}
+              color="#3E517A"
+            />
+          </div>
+          <div className="sub chart-wrapper">
+            <LineChart
+              data={this.state.pressures}
+              title={"Pressure (kPa)"}
               color="#3E517A"
             />
           </div>
