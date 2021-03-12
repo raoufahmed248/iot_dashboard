@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'sensorData.apps.SensordataConfig'
+    'sensorData.apps.SensordataConfig',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -49,6 +50,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',  # added to solve CORS
+    'django.middleware.common.CommonMiddleware',  # added to solve CORS
 ]
 
 ROOT_URLCONF = 'iotDashboard.urls'
@@ -56,7 +59,7 @@ ROOT_URLCONF = 'iotDashboard.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR,'dashboardFrontend' ,'dashboard-frontend')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -119,4 +122,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
+
 STATIC_URL = '/static/'
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'dashboardFrontend', 'dashboard-frontend', "build", "static"),  # update the STATICFILES_DIRS
+)
+
+CORS_ORIGIN_ALLOW_ALL = True # added to solve CORS

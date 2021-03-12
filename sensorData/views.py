@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from sensorData.models import Temperature, Pressure, Humidity
 from sensorData.serializers import temperatureSerializer, pressureSerializer, humiditySerializer
-
+from django.shortcuts import render
 from rest_framework import permissions
 
 # TEMPERATURE VIEWS
@@ -134,6 +134,7 @@ class PressureDetail(APIView):
         pressure = self.get_object(pk)
         pressure.delete()
         return Response(status = status.HTTP_204_NO_CONTENT)
+
 
 
 
