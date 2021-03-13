@@ -76,7 +76,7 @@ class App extends Component {
   }
   getTemperatureData() {
     let outputData = [];
-    axios.get("http://localhost:8000/temperatures/")
+    axios.get("http://localhost:8000/temperaturesLimited/20")
       .then( (response) =>{
         
         var newResp = response.data;
@@ -91,7 +91,7 @@ class App extends Component {
   }
   getHumidityData() {
     let outputData = [];
-    axios.get("http://localhost:8000/humidities/")
+    axios.get("http://localhost:8000/humiditiesLimited/20")
       .then( (response) =>{
         
         var newResp = response.data;
@@ -106,7 +106,7 @@ class App extends Component {
   }
   getPressureData() {
     let outputData = [];
-    axios.get("http://localhost:8000/pressures/")
+    axios.get("http://localhost:8000/pressuresLimited/20")
       .then( (response) =>{
         
         var newResp = response.data;
