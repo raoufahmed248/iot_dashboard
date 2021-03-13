@@ -24,6 +24,15 @@ class TemperatureList(APIView):
             return Response(serializer.data, status = status.HTTP_201_CREATED)
         return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
 
+
+class TemperatureListLimited(APIView):
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    def get(self, request, amount, format = None):
+        temperatures = Temperature.objects.all()[:amount]
+        serializer = temperatureSerializer(temperatures, many = True)
+        return Response(serializer.data)
+
+
 class TemperatureDetail(APIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     def get_object(self, pk):
@@ -68,6 +77,14 @@ class HumidityList(APIView):
             return Response(serializer.data, status = status.HTTP_201_CREATED)
         return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
 
+
+class HumidityListLimited(APIView):
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    def get(self, request, amount, format = None):
+        humidities = Humidity.objects.all()[:amount]
+        serializer = humiditySerializer(humidities, many = True)
+        return Response(serializer.data)
+
 class HumidityDetail(APIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     def get_object(self, pk):
@@ -109,6 +126,13 @@ class PressureList(APIView):
             serializer.save()
             return Response(serializer.data, status = status.HTTP_201_CREATED)
         return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
+
+class PressureListLimited(APIView):
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    def get(self, request, amount, format = None):
+        pressures = Pressure.objects.all()[:amount]
+        serializer = pressureSerializer(pressures, many = True)
+        return Response(serializer.data)
 
 class PressureDetail(APIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
