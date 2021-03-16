@@ -8,6 +8,8 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import axios from 'axios';
 
 import {LineChart, BarChart, DoughnutChart} from "./Component/Dashboard/index.js";
+import MapContainer from "./Component/Dashboard/MapContainer.js"
+
 // Data generation
 function getRandomArray(numItems) {
   // Create random array of objects
@@ -160,6 +162,9 @@ class App extends Component {
               title={this.state.data[3].title}
               colors={['#a8e0ff', '#8ee3f5', '#70cad1', '#3e517a', '#b08ea2', '#BBB6DF']}
             />
+          </div>
+          <div className= "main map">
+            <MapContainer />
           </div>
         </div>
     );
