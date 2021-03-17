@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from sensorData.models import Temperature, Pressure, Humidity
+from sensorData.models import Temperature, Pressure, Humidity, Location
 
 class temperatureSerializer(serializers.ModelSerializer):
     class Meta:
@@ -15,3 +15,8 @@ class pressureSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pressure
         fields = ['created','pressure', 'id']
+
+class locationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Location
+        fields = ['created','lng','lat', 'id']

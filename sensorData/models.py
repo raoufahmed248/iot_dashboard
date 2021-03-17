@@ -25,5 +25,13 @@ class Pressure(models.Model):
     class Meta:
         ordering = ['-created']
 
+#in kPa
+class Location(models.Model):
+    created = models.DateTimeField(auto_now_add=True)
+    lat = models.DecimalField(max_digits= 10,  decimal_places=7)
+    lng = models.DecimalField(max_digits= 10,  decimal_places=7)
+    class Meta:
+        ordering = ['-created']
+
 
 # Create your models here.
