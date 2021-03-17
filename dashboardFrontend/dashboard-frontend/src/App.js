@@ -73,7 +73,8 @@ class App extends Component {
       data: getData(),
       temperatures: [],
       humidities: [],
-      pressures: [],  
+      pressures: [],
+      locations: []
     };
   }
   getTemperatureData() {
@@ -121,11 +122,28 @@ class App extends Component {
         this.setState({pressures:newResp})
       });
   }
+  getLocationData() {
+    let outputData = [];
+    axios.get("http://localhost:8000/locationsLimited/20")
+      .then( (response) =>{
+        
+        var newResp = response.data;
+        newResp.forEach(function (item,index) {
+          var newDate = new Date(item.created);
+          item.time = newDate;
+          item.lat = Number(item.lat);
+          item.lng = Number(item.lng);
+        })
+        console.log(newResp)
+        this.setState({locations:newResp})
+      });
+  }
   componentDidMount() {
     window.setInterval(() => {
       this.getTemperatureData();
       this.getHumidityData();
       this.getPressureData();
+      this.getLocationData();
       this.setState({
         data: getData()
       })
@@ -158,7 +176,7 @@ class App extends Component {
           </div>
           <div className= "main map">
             <MapContainer
-              locations={[{lat:44.1, lng:20.3},{lat:42.1, lng:22.3},{lat:41.1, lng:21.3}]} />
+              locations={this.state.locations} />
           </div>
         </div>
     );

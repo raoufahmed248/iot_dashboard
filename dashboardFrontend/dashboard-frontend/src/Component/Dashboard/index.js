@@ -60,6 +60,7 @@ class LineChart extends React.Component {
   }
 
   componentDidUpdate() {
+    console.log("TEST2")
     this.myChart.data.labels = this.props.data.map(d => d.time);
     this.myChart.data.datasets[0].data = this.props.data.map(d => d.value);
     this.myChart.update();
