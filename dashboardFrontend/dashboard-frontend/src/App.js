@@ -156,15 +156,9 @@ class App extends Component {
               color="#3E517A"
             />
           </div>
-          <div className="main chart-wrapper">
-            <DoughnutChart
-              data={this.state.data[3].data}
-              title={this.state.data[3].title}
-              colors={['#a8e0ff', '#8ee3f5', '#70cad1', '#3e517a', '#b08ea2', '#BBB6DF']}
-            />
-          </div>
           <div className= "main map">
-            <MapContainer />
+            <MapContainer
+              locations={[{lat:44.1, lng:20.3},{lat:42.1, lng:22.3},{lat:41.1, lng:21.3}]} />
           </div>
         </div>
     );
