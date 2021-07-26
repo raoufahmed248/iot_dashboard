@@ -30,3 +30,7 @@ To start react server, (In another terminal):
 
 * Start both django and react servers.
 * Run the dummy python script to simulate a RPi sending data.
+
+
+### Snippet
+![alt text](IOTSnippet.png)
