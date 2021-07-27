@@ -33,4 +33,4 @@ To start react server, (In another terminal):
 
 
 ### Snippet
-![alt text](IOTSnippet.png)
+![Alt text](IOTSnippet.PNG)
